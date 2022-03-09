@@ -16,11 +16,11 @@ protected static boolean isOpen = false;
 		// TODO Auto-generated method stub
 		evalPostfix( "a*b/(c-a)+d*e");
 	}
+	/**
+	 * This method checks the priority of the operator. 
+	 * the higher the return value the more valuable it is. this is used later on.
+	 */
 	public static int checkPrecedent(char c) {
-		/**
-		 * This method checks the priority of the operator
-		 * the higher the return value the more valuable it is. this is used later on 
-		 */
 		switch(c) {
 		case '+':
 		case '-':
@@ -44,7 +44,7 @@ protected static boolean isOpen = false;
 	 * if the method sees a ) it will POP the stack WHILE the stack is not empty and the stack.peek val is not (. this allows it to cycle back from LIFO order from ')' to '('. 
 	 * at the end the stack pops until its empty. The stack also checks if theres a ( in the stack because if there is that means there was no ) which is an invalid expression, it will return that error back to the user.  
 	 */
-	public static void evalPostfix(String infix) {
+	public static String evalPostfix(String infix) {
 
 		Stack<Character> operatorStack = new Stack<Character>();
 		String postfix = "";
@@ -56,9 +56,6 @@ protected static boolean isOpen = false;
 				postfix = postfix + nextC;
 				//System.out.println(posfix);
 			}
-			else if(nextC == '(') {
-				operatorStack.push(nextC);
-			}
 			else if(nextC == ')') {
 				while((!operatorStack.isEmpty()) && (operatorStack.peek()!='(')) {
 					//pops everything into the equation up to (
@@ -67,6 +64,10 @@ protected static boolean isOpen = false;
 				operatorStack.pop();
 
 			}
+			else if(nextC == '(') {
+				operatorStack.push(nextC);
+			}
+
 			else {
 				while(!operatorStack.isEmpty() && checkPrecedent(nextC) <= checkPrecedent(operatorStack.peek())) {
 					postfix = postfix+operatorStack.pop();
@@ -87,6 +88,7 @@ protected static boolean isOpen = false;
 			postfix = postfix + operatorStack.pop();
 		}
 		System.out.println(postfix);
+		return postfix;
 	}
 
 }
