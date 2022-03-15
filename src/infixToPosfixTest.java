@@ -10,8 +10,8 @@ class infixToPosfixTest {
 
 	@Test
 	void test() {
-		assertEquals("ABC*+D+",infixToPosfix.evalPostfix("A+B*C+D"));
-		assertEquals("AB+CD+*",infixToPosfix.evalPostfix("(A+B)*(C+D)"));
+		assertEquals("ABC*+D+",infixToPosfix.convertToPostfix("A+B*C+D"));
+		assertEquals("AB+CD+*",infixToPosfix.convertToPostfix("(A+B)*(C+D)"));
 	}
 
 }

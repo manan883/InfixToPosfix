@@ -1,22 +1,17 @@
 import java.util.*;
 
 /**
- * 
  * @author manan
- * From Textbook
-Algorithm convertToPostfix(infix) 
-// Converts an infix expression to an equivalent postfix expression. 
-operatorStack = a new empty stack 
-postfix = a new empty string 
-
+ * Converts an infix expression to an equivalent postfix expression. 
  */
 public class infixToPosfix {
 protected static boolean isOpen = false;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		evalPostfix( "a*b/(c-a)+d*e");
+		convertToPostfix( "a*b/(c-a)+d*e");
 	}
 	/**
+	 * @author manan
 	 * This method checks the priority of the operator. 
 	 * the higher the return value the more valuable it is. this is used later on.
 	 */
@@ -34,6 +29,7 @@ protected static boolean isOpen = false;
 		return -1;
 	}
 	/**
+	 * @author manan
 	 * This method takes in a String and does the evaluation of infix to postifx. 
 	 * The general idea of how infix to postfix works is it moves all the operators after the operands. 
 	 * The constraint is tho, if the expression has a (, the postfix will leave the operators after the ) but remove the () from the final string. 
@@ -44,7 +40,7 @@ protected static boolean isOpen = false;
 	 * if the method sees a ) it will POP the stack WHILE the stack is not empty and the stack.peek val is not (. this allows it to cycle back from LIFO order from ')' to '('. 
 	 * at the end the stack pops until its empty. The stack also checks if theres a ( in the stack because if there is that means there was no ) which is an invalid expression, it will return that error back to the user.  
 	 */
-	public static String evalPostfix(String infix) {
+	public static String convertToPostfix(String infix) {
 
 		Stack<Character> operatorStack = new Stack<Character>();
 		String postfix = "";
