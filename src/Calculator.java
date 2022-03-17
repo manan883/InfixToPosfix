@@ -11,22 +11,21 @@ public class Calculator {
 //		System.out.println(stack1.peek());
 //		System.out.println("testing complete");
 		
-		System.out.println(evaluatePostfix("91/"));
+		System.out.println(evaluatePostfix("61/2/"));
 	}
 
 
 	private static int evaluatePostfix(String postfixString) {
-	    StackInterface<Character> valueStack = new ResizableArrayStack<>();
+	    StackInterface<Integer> valueStack = new ResizableArrayStack<>();
 	    
 	    int tempCount = 0;
 	    int postfixLength = postfixString.length();
 	    char nextCharacter;
-	    
-	    char leftValueChar;
+	    int nextCharacterInt;
+	    int leftValue;
+	    int rightValue;
 	    int leftValueInt;
-	    char rightValueChar;
 	    int rightValueInt;
-	    
 	    int resultValue;
 	    
 	    while (tempCount < postfixLength) {
@@ -34,18 +33,23 @@ public class Calculator {
 	    		    	
 	    	switch(nextCharacter) {
 	    		case '0' : case '1' : case '2' : case '3' : case '4' : case '5' : case '6' : case '7' : case '8' : case '9' :
-    				valueStack.push(nextCharacter);
+	    			
+	    			nextCharacterInt = Character.getNumericValue(nextCharacter);
+    				valueStack.push(nextCharacterInt);
+	    			System.out.println(nextCharacterInt + " has been pushed");
+
     			break;
     			
     			
 	    		case '+' : case '-' : case '*' : case '/' : case '^' :
     				if (nextCharacter == '/') {
-    					rightValueChar = valueStack.pop();
-    	    			leftValueChar = valueStack.pop();
-    	    			rightValueInt = Character.getNumericValue(rightValueChar);
-    	    			leftValueInt = Character.getNumericValue(leftValueChar);
-    	    			resultValue = leftValueInt/rightValueInt;
-    	    			valueStack.push((char) resultValue);
+
+    	    			rightValue = valueStack.pop();
+    	    			leftValue = valueStack.pop();
+    	    			resultValue = leftValue/rightValue;
+    	    			valueStack.push(resultValue);
+    					System.out.println(resultValue + " is the result");
+
     				}
 	    		break;
 	    		
