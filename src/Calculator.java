@@ -2,7 +2,7 @@
 public class Calculator {
 
 	public static void main(String[] args) {
-		System.out.println(evaluatePostfix("23*42-/56*+"));
+		System.out.println(evaluatePostfix("23*42-/56*+2^"));
 	}
 
 
@@ -60,7 +60,7 @@ public class Calculator {
     				if (nextCharacter == '^') {
     	    			rightValue = valueStack.pop();
     	    			leftValue = valueStack.pop();
-    	    			resultValue = leftValue^rightValue;
+    	    			resultValue = (int) Math.pow(leftValue, rightValue);
     	    			valueStack.push(resultValue);
     					System.out.println(resultValue + " is the result of " + leftValue + " ^ " + rightValue);
     				}
