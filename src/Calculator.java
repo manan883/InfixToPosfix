@@ -7,6 +7,11 @@ public class Calculator {
 		
 	}
 
+	/** Evaluates a postfix expression using a ResizableArrayStack object.
+    @param postfixString  The string that contains the postfix expression.
+    @return Returns the top value in the stack which is the final result of the expression.
+    @author Jacob Alonzo
+    */
 	public static int evaluatePostfix(String postfixString) {
 		// Creates a ResizableArrayStack object
 	    StackInterface<Integer> valueStack = new ResizableArrayStack<>();
@@ -129,6 +134,11 @@ public class Calculator {
 	    
 	} // end evaluatePostFix
 	
+	/** Checks the priority of the operator, the higher the return value the more valuable it is.
+	 @param c  The character that holds the operand to be checked.
+     @return Returns an integer that symbolizes the operand's precedence.
+	 @author Manan Patel
+	*/
 	public static int checkPrecedent(char c) {
 		switch(c) {
 		case '+':
@@ -143,6 +153,11 @@ public class Calculator {
 		return -1;
 	}
 	
+	/** This method takes in a string and does the evaluation of infix to postfix. 
+	 @param infix  The string that contains the infix expression to be converted.
+     @return Returns a string with the converted infix expression.
+	 @author Manan Patel
+	*/
 	public static String convertToPostfix(String infix) {
 		LinkedStack<Character> operator = new LinkedStack<Character>();
 		String postfix = "";
