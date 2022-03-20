@@ -60,10 +60,11 @@ protected static boolean isOpen = false;
 				operator.pop();
 
 			}
+			//check if char is (
 			else if(nextC == '(') {
 				operator.push(nextC);
 			}
-
+			// its not a ( ) so it has to be an operator 
 			else {
 				while(!operator.isEmpty() && checkPrecedent(nextC) <= checkPrecedent(operator.peek())) {
 					postfix = postfix+operator.pop();
