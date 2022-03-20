@@ -2,7 +2,9 @@
 public class Calculator {
 
 	public static void main(String[] args) {
+		System.out.println(convertToPostfix("a*b/(c-a)+d*e"));
 		System.out.println(evaluatePostfix("23*42-/56*+"));
+		
 	}
 
 	public static int evaluatePostfix(String postfixString) {
@@ -126,5 +128,65 @@ public class Calculator {
 	    return valueStack.peek();
 	    
 	} // end evaluatePostFix
+	
+	public static int checkPrecedent(char c) {
+		switch(c) {
+		case '+':
+		case '-':
+			return 0;
+		case '*':
+		case '/':
+			return 1;
+		case '^':
+			return 2;
+		}
+		return -1;
+	}
+	
+	public static String convertToPostfix(String infix) {
+		LinkedStack<Character> operator = new LinkedStack<Character>();
+		String postfix = "";
+		int i = 0;
+		while(i < infix.length()) {
+			char nextC = infix.charAt(i);
+			//check if the char parsed is not an operator 
+			if(Character.isLetterOrDigit(nextC)) {
+				postfix = postfix + nextC;
+			}
+			//check if char is )
+			else if(nextC == ')') {
+				while((!operator.isEmpty()) && (operator.peek()!='(')) {
+					//pops everything into the equation up to (
+					postfix = postfix + operator.pop();
+				}
+				operator.pop();
+
+			}
+			//check if char is (
+			else if(nextC == '(') {
+				operator.push(nextC);
+			}
+			// its not a ( ) so it has to be an operator 
+			else {
+				while(!operator.isEmpty() && checkPrecedent(nextC) <= checkPrecedent(operator.peek())) {
+					postfix = postfix+operator.pop();
+				}
+				operator.push(nextC);
+
+			}
+	
+			i++;
+			
+		}
+		while(!operator.isEmpty()) {
+			if(operator.peek() == '(') {
+				//error handles the input having ( but not a )
+				System.out.println("Invalid input");
+				break;
+			}
+			postfix = postfix + operator.pop();
+		}
+		return postfix;
+	} // end convertToPostfix
 	
 } // end Calculator
