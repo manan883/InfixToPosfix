@@ -41,47 +41,47 @@ protected static boolean isOpen = false;
 	 * at the end the stack pops until its empty. The stack also checks if theres a ( in the stack because if there is that means there was no ) which is an invalid expression, it will return that error back to the user.  
 	 */
 	public static String convertToPostfix(String infix) {
-
-		Stack<Character> operatorStack = new Stack<Character>();
+		LinkedBagStack<Character> operator = new LinkedBagStack<Character>();
+//		Stack<Character> operator = new Stack<Character>();
 		String postfix = "";
 		int i = 0;
 		while(i < infix.length()) {
 			char nextC = infix.charAt(i);
-			//call switch method to check the precedent
+			//check if the char parsed is not an operator 
 			if(Character.isLetterOrDigit(nextC)) {
 				postfix = postfix + nextC;
-				//System.out.println(posfix);
 			}
+			//check if char is )
 			else if(nextC == ')') {
-				while((!operatorStack.isEmpty()) && (operatorStack.peek()!='(')) {
+				while((!operator.isEmpty()) && (operator.peek()!='(')) {
 					//pops everything into the equation up to (
-					postfix = postfix + operatorStack.pop();
+					postfix = postfix + operator.pop();
 				}
-				operatorStack.pop();
+				operator.pop();
 
 			}
 			else if(nextC == '(') {
-				operatorStack.push(nextC);
+				operator.push(nextC);
 			}
 
 			else {
-				while(!operatorStack.isEmpty() && checkPrecedent(nextC) <= checkPrecedent(operatorStack.peek())) {
-					postfix = postfix+operatorStack.pop();
+				while(!operator.isEmpty() && checkPrecedent(nextC) <= checkPrecedent(operator.peek())) {
+					postfix = postfix+operator.pop();
 				}
-				operatorStack.push(nextC);
+				operator.push(nextC);
 
 			}
 	
 			i++;
 			
 		}
-		while(!operatorStack.isEmpty()) {
-			if(operatorStack.peek() == '(') {
+		while(!operator.isEmpty()) {
+			if(operator.peek() == '(') {
 				//error handles the input having ( but not a )
 				System.out.println("Invalid input");
 				break;
 			}
-			postfix = postfix + operatorStack.pop();
+			postfix = postfix + operator.pop();
 		}
 		System.out.println(postfix);
 		return postfix;
