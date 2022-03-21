@@ -83,4 +83,17 @@ public class CalculatorTest extends Calculator {
 		System.out.println("");
 		
 		} // end divisionTest
+	
+	@Test
+	public void exponentialTest() {	
+		System.out.println("");
+		System.out.println(" * * Exponential Tests * * ");
+		
+		System.out.println("Test #1, Regular Exponential: 24^");
+		int test = evaluatePostfix("24^");
+		assertEquals("Answer: " + test, "Answer: 16");
+		System.out.println("Answer: " + test);
+		System.out.println("");
+		
+		} // end divisionTest
 }
